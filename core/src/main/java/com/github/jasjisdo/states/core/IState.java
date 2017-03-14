@@ -12,14 +12,14 @@ import java.util.function.Predicate;
  */
 public interface IState<T> extends IFact {
 
-    IState<T> doTransition(IStateContext context);
+    void doTransition(IStateContext context);
 
-    List<Tuple3<IState<T>, Predicate<T>, Try.CheckedConsumer<T>>> getSuccessors();
+    List<Tuple3<IState, Predicate<T>, Try.CheckedConsumer<T>>> getSuccessors();
 
-    void setSuccessors(List<Tuple3<IState<T>, Predicate<T>, Try.CheckedConsumer<T>>> successors);
+    void setSuccessors(List<Tuple3<IState, Predicate<T>, Try.CheckedConsumer<T>>> successors);
 
-    boolean addSuccessor(IState<T> succState, Predicate<T> predicate, Try.CheckedConsumer<T> consumer);
+    boolean addSuccessor(IState succState, Predicate<T> predicate, Try.CheckedConsumer<T> consumer);
 
-    boolean removeSuccessor(IState<T> succState, Predicate<T> predicate, Try.CheckedConsumer<T> consumer);
+    boolean removeSuccessor(IState succState, Predicate<T> predicate, Try.CheckedConsumer<T> consumer);
 
 }

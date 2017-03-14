@@ -39,13 +39,12 @@ public class StateDemo implements IStateContext {
 
     public static void main(String... args) {
 
-        boolean aBoolean = true;
-        EndState endState = new EndState(aBoolean);
+        EndState endState = new EndState("Hello, World");
 
         // [Start] --(A)--> [End]
         Predicate<Boolean> predicate = b -> b; // A
         @SuppressWarnings("unchecked")
-        StartState startState = new StartState(aBoolean,
+        StartState startState = new StartState(true,
                 Tuple.of(endState, predicate, b -> System.out.println(DateTime.now().toDate()))
         );
 
@@ -53,7 +52,7 @@ public class StateDemo implements IStateContext {
         stateDemo.setCurrentState(startState);
         System.out.println("state: " + stateDemo.getCurrentState());
 
-        System.out.println("do: [Start] --(A)--> [End]; with A: x -> " + predicate.test(aBoolean));
+        System.out.println("do: [Start] --(A)--> [End]; with A: x -> " + predicate.test(true));
         startState.doTransition(stateDemo);
 
         System.out.println("previous state: " + stateDemo.getPreviousState());
