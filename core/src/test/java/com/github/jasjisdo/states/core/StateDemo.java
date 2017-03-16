@@ -1,8 +1,5 @@
 package com.github.jasjisdo.states.core;
 
-import javaslang.Tuple;
-import org.joda.time.DateTime;
-
 import java.util.function.Predicate;
 
 /**
@@ -39,14 +36,14 @@ public class StateDemo implements IStateContext {
 
     public static void main(String... args) {
 
-        EndState endState = new EndState("Hello, World");
+        EndState endState = new EndState();
 
         // [Start] --(A)--> [End]
         Predicate<Boolean> predicate = b -> b; // A
         @SuppressWarnings("unchecked")
-        StartState startState = new StartState(true,
-                Tuple.of(endState, predicate, b -> System.out.println(DateTime.now().toDate()))
-        );
+
+        ITransition transition = new Transition<>(true, predicate, () -> System.out.println("Hello Reflex"), endState);
+        StartState startState = new StartState(transition);
 
         StateDemo stateDemo = new StateDemo();
         stateDemo.setCurrentState(startState);

@@ -1,25 +1,45 @@
 package com.github.jasjisdo.states.core;
 
 import de.dailab.jiactng.agentcore.knowledge.IFact;
-import javaslang.Tuple3;
-import javaslang.control.Try;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 /**
  *
  */
-public interface IState<T> extends IFact {
+public interface IState extends IFact {
 
-    void doTransition(IStateContext context);
+    String getName();
 
-    List<Tuple3<IState, Predicate<T>, Try.CheckedConsumer<T>>> getSuccessors();
+    default void doTransition(IStateContext context) {
 
-    void setSuccessors(List<Tuple3<IState, Predicate<T>, Try.CheckedConsumer<T>>> successors);
+        if (context.getCurrentState() != null) {
+            context.setPreviousState(context.getCurrentState());
+        }
 
-    boolean addSuccessor(IState succState, Predicate<T> predicate, Try.CheckedConsumer<T> consumer);
+        // set this state as new state
+        context.setCurrentState(this);
 
-    boolean removeSuccessor(IState succState, Predicate<T> predicate, Try.CheckedConsumer<T> consumer);
+        ITransition transition = getTransitions().stream()
+                .filter(ITransition::isFulFilled)
+                .findFirst().orElse(null);
+
+        if (transition != null) {
+            // update state
+            context.setCurrentState(transition.getSuccessor());
+            try {
+                transition.performReflex();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
+        }
+
+    }
+
+    List<ITransition> getTransitions();
+
+    boolean addTransition(ITransition transition);
+
+    boolean removeTransition(ITransition transition);
 
 }

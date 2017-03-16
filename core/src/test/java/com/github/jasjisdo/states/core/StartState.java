@@ -9,14 +9,10 @@ import java.util.function.Predicate;
 /**
  * Created by domann on 17.02.17.
  */
-public class StartState extends AbstractState<Boolean> {
+public class StartState extends State {
 
-
-    public StartState(Boolean aBoolean, List<Tuple3<IState, Predicate<Boolean>, Try.CheckedConsumer<Boolean>>> successors) {
-        super(aBoolean, successors);
+    public StartState(ITransition... transitions) {
+        super(transitions);
     }
 
-    public StartState(Boolean aBoolean, Tuple3<IState, Predicate<Boolean>, Try.CheckedConsumer<Boolean>>... successors) {
-        super(aBoolean, successors);
-    }
 }
