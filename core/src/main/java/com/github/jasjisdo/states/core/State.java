@@ -20,7 +20,7 @@ public class State implements IState {
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName();
+        return this.getClass().getName();
     }
 
     @Override
@@ -29,13 +29,13 @@ public class State implements IState {
     }
 
     @Override
-    public boolean addTransition(ITransition transition) {
-        return transitions.add(transition);
+    public boolean addTransitions(ITransition... transitions) {
+        return this.transitions.addAll(Lists.newArrayList(transitions));
     }
 
     @Override
-    public boolean removeTransition(ITransition transition) {
-        return transitions.remove(transition);
+    public boolean removeTransitions(ITransition... transitions) {
+        return this.transitions.removeAll(Lists.newArrayList(transitions));
     }
 
     @Override

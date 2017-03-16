@@ -8,13 +8,13 @@
     <parent>
         <groupId>com.github.jasjisdo</groupId>
         <artifactId>states</artifactId>
-        <version>1.0.0</version>
+        <version>0.0.1</version>
     </parent>
 
     <groupId>com.github.jasjisdo.states</groupId>
     <artifactId>core</artifactId>
     <packaging>jar</packaging>
-    <name>Common Module of Route Charge</name>
+    <name>Core Module of States</name>
 
     <dependencies>
 
@@ -33,11 +33,6 @@
             <artifactId>javaslang</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-        </dependency>
-
         <!-- Library for unit tests -->
         <dependency>
             <groupId>junit</groupId>
@@ -48,6 +43,7 @@
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-library</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
