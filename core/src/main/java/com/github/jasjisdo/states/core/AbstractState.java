@@ -6,26 +6,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class State implements IState {
+public abstract class AbstractState implements IState {
 
     private List<ITransition> transitions;
 
-    public State() {
+    public AbstractState() {
         this.transitions = new ArrayList<>();
     }
 
-    public State(ITransition... transitions) {
+    public AbstractState(ITransition... transitions) {
         this.transitions = Lists.newArrayList(transitions);
     }
 
     @Override
     public String toString() {
-        return this.getClass().getName();
+        return getName();
     }
 
     @Override
-    public String getName() {
-        return toString();
+    public abstract String getName();
+
+    @Override
+    public boolean addTransition(ITransition transition) {
+        return transitions.add(transition);
+    }
+
+    @Override
+    public boolean removeTransition(ITransition transition) {
+        return transitions.remove(transition);
     }
 
     @Override
@@ -42,4 +50,5 @@ public class State implements IState {
     public List<ITransition> getTransitions() {
         return transitions;
     }
+
 }

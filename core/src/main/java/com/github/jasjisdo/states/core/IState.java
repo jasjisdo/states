@@ -38,6 +38,10 @@ public interface IState extends IFact {
 
     List<ITransition> getTransitions();
 
+    boolean addTransition(ITransition transition);
+
+    boolean removeTransition(ITransition transition);
+
     boolean addTransitions(ITransition... transitions);
 
     boolean removeTransitions(ITransition... transitions);

@@ -5,7 +5,7 @@ import javaslang.control.Try;
 import java.util.function.Predicate;
 
 /**
- * Created by domann on 16.03.17.
+ *
  */
 public class Transition<T> implements GenericTransition<T> {
 
@@ -25,6 +25,13 @@ public class Transition<T> implements GenericTransition<T> {
         this.predicate = predicate;
         this.reflex = reflex;
         this.successor = successor;
+    }
+
+    @Override
+    public String toString() {
+        return "Transition{" +
+                "successor=" + successor.getName() +
+                '}';
     }
 
     @Override
